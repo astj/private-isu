@@ -16,4 +16,4 @@ if [ -z $TEAMNAME ]; then
     exit 1
 fi
 
-$DIR/bin/benchmarker -u $DIR/userdata -t http://$APP_IP/ "$@" | tee | /opt/mackerel-agent/plugins/bin/mackerel-plugin-json -stdin -prefix $MACKEREL_SERVICE_METRIC_PREFIX -include score | sed "s/score/score-$TEAMNAME/" | mkr throw -s $MACKEREL_SERVICE
+$DIR/bin/benchmarker -u $DIR/userdata -t http://$APP_IP/ "$@" | tee /dev/stderr | /opt/mackerel-agent/plugins/bin/mackerel-plugin-json -stdin -prefix $MACKEREL_SERVICE_METRIC_PREFIX -include score | sed "s/score/score-$TEAMNAME/" | mkr throw -s $MACKEREL_SERVICE
